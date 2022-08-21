@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		modeData,
-		seededRandomInt,
 		createDefaultStats,
 		createNewGame,
 		createDefaultSettings,
@@ -9,6 +8,8 @@
 		ROWS,
 		getWordNumber,
 		words,
+		targets,
+		getWord,
 	} from "./utils";
 	import Game from "./components/Game.svelte";
 	import { letterStates, settings, mode } from "./stores";
@@ -41,14 +42,20 @@
 		modeData.modes[modeVal].historical = true;
 	}
 	mode.subscribe((m) => {
-		localStorage.setItem("mode", `${m}`);
-		window.location.hash = GameMode[m];
+		//localStorage.setItem("mode", `${m}`);
+		//window.location.hash = GameMode[m];
 		stats = (JSON.parse(localStorage.getItem(`stats-${m}`)) as Stats) || createDefaultStats(m);
-		word = words.words[seededRandomInt(0, words.words.length, modeData.modes[m].seed)];
+		//word = words.words[seededRandomInt(0, words.words.length, modeData.modes[m].seed)];
+		//word = "Abigail";
+		word = getWord();
+
 		let temp: GameState;
+		console.log("YOO", m, modeData.modes[m].historical);
 		if (modeData.modes[m].historical === true) {
+			
 			temp = JSON.parse(localStorage.getItem(`state-${m}-h`));
-			if (!temp || temp.wordNumber !== getWordNumber(m)) {
+			console.log("HII", temp);
+			if (!temp || temp.wordNumber !== getWordNumber()) {
 				state = createNewGame(m);
 			} else {
 				state = temp;
@@ -60,11 +67,12 @@
 			} else {
 				// This is for backwards compatibility, can be removed in a day
 				if (!temp.wordNumber) {
-					temp.wordNumber = getWordNumber(m);
+					temp.wordNumber = getWordNumber();
 				}
 				state = temp;
 			}
 		}
+
 		// Set the letter states when data for a new game mode is loaded so the keyboard is correct
 		const letters = createLetterStates();
 		for (let row = 0; row < ROWS; ++row) {

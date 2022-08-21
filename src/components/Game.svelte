@@ -26,12 +26,13 @@
 		modeData,
 		checkHardMode,
 		ROWS,
-		COLS,
 		newSeed,
 		createNewGame,
-		seededRandomInt,
 		createLetterStates,
 		words,
+		getWordNumber,
+		targets,
+isValidWord,
 	} from "../utils";
 	import { letterStates, settings, mode } from "../stores";
 
@@ -59,10 +60,11 @@
 	$: if (showSettings && tips) tip = Math.floor(tips.length * Math.random());
 
 	function submitWord() {
-		if (game.board.words[game.guesses].length !== COLS) {
+		console.log('sw', word, game.board.words[game.guesses]);
+		if (game.board.words[game.guesses].length !== word.length) {
 			toaster.pop("Not enough letters");
 			board.shake(game.guesses);
-		} else if (words.contains(game.board.words[game.guesses])) {
+		} else if (isValidWord(game.board.words[game.guesses])) {
 			if (game.guesses > 0) {
 				const hm = checkHardMode(game.board, game.guesses);
 				if ($settings.hard[$mode]) {
@@ -103,7 +105,7 @@
 		game.active = false;
 		setTimeout(
 			() => toaster.pop(PRAISE[game.guesses - 1]),
-			DELAY_INCREMENT * COLS + DELAY_INCREMENT
+			DELAY_INCREMENT * word.length + DELAY_INCREMENT
 		);
 		setTimeout(setShowStatsTrue, delay * 1.4);
 		if (!modeData.modes[$mode].historical) {
@@ -140,10 +142,11 @@
 	}
 
 	function reload() {
+		console.log("Hello, when does this get falled", $mode);
 		modeData.modes[$mode].historical = false;
 		modeData.modes[$mode].seed = newSeed($mode);
 		game = createNewGame($mode);
-		word = words.words[seededRandomInt(0, words.words.length, modeData.modes[$mode].seed)];
+		word = targets.words[getWordNumber()];
 		$letterStates = createLetterStates();
 		showStats = false;
 		showRefresh = false;
@@ -162,7 +165,7 @@
 
 <svelte:body on:click={board.hideCtx} on:contextmenu={board.hideCtx} />
 
-<main class:guesses={game.guesses !== 0} style="--rows: {ROWS}; --cols: {COLS}">
+<main class:guesses={game.guesses !== 0} style="--rows: {ROWS}; --cols: {word.length}">
 	<Header
 		bind:showRefresh
 		tutorial={$settings.tutorial === 2}
@@ -195,6 +198,7 @@
 			showSettings = false;
 		}}
 		disabled={!game.active || $settings.tutorial === 3}
+		word_length={game.board.state[0].length}
 	/>
 </main>
 
@@ -236,7 +240,6 @@
 	{#if game.active}
 		<div class="concede" on:click={concede}>give up</div>
 	{/if}
-	<Tips bind:this={tips} index={tip} />
 
 	<div slot="footer">
 		<a href="https://www.nytimes.com/games/wordle/" target="_blank">Original Wordle</a>

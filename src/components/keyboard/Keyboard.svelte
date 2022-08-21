@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { createEventDispatcher, onDestroy } from "svelte/internal";
 	import { letterStates, mode } from "../../stores";
-	import { COLS, keys } from "../../utils";
+	import { keys } from "../../utils";
 	import Key from "./Key.svelte";
 
 	export let value = "";
 	export let disabled = false;
+	export let word_length: number;
 	let preventChange = true;
 
 	const dispatch = createEventDispatcher();
 
 	function appendValue(char: string) {
-		if (!disabled && value.length < COLS) {
+		if (!disabled && value.length < word_length) {
 			dispatch("keystroke", char);
 			value += char;
 		}

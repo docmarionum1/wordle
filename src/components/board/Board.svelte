@@ -57,6 +57,7 @@
 			bind:value={value[i]}
 			state={board.state[i]}
 			on:ctx={(e) => context(e.detail.x, e.detail.y, i, value[i])}
+			length={board.state[i].length}
 		/>
 	{/each}
 	{#if icon}
@@ -76,13 +77,15 @@
 <style>
 	.board {
 		display: grid;
-		grid-template-rows: repeat(var(--rows), 1fr);
+		grid-template-rows: repeat(var(--rows));
 		gap: 5.5px;
 		max-height: 420px;
+		max-width: 100%;
 		flex-grow: 1;
 		aspect-ratio: var(--cols) / var(--rows);
 		padding: 10px;
 		position: relative;
+		align-content: center;
 	}
 	svg {
 		position: absolute;

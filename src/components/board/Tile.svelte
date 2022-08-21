@@ -54,11 +54,12 @@
 		}
 	}
 	.tile {
-		font-size: 2rem;
+		//font-size: 2rem;
 		font-weight: bold;
 		text-transform: uppercase;
 		position: relative;
 		transform-style: preserve-3d;
+		aspect-ratio: 1;
 		&[data-animation="bounce"] {
 			animation: bounce 1s;
 		}
