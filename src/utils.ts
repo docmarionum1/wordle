@@ -12,36 +12,41 @@ export const words = {
 
 export const targets = {
 	words: [
-		//"prospectplace",
-		//"pizza",
 		// "abigail",
-		// "ios",
-		// "jeremy",
-		// "barnard",
 		// "litter",
 		//"prospect place",
 		//"subway",
 		"pizza",
+		"nerds",
 		"geode",
 		"magic",
-		"wuhan",
+		//"wuhan",
 		"abby",
+		"jeremy",
 		"ios",
-		"barnard",
+		//"barnard",
 		"antarctica",
-		"little cupcake",
+		//"little cupcake",
 		"sidewalk labs",
 	],
 
 	definitions: {
-		"abigail": {
+		"abby": {
 			"word": "Abigail",
 			"phonetic": "",
 			"origin": "",
 			"partOfSpeech": "noun",
 			"meanings": [
-				"variant of Abby",
 				"The bride",
+			]
+		},
+		"jeremy": {
+			"word": "Jeremy",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"The groom",
 			]
 		},
 		"ios": {
@@ -60,6 +65,81 @@ export const targets = {
 			"partOfSpeech": "noun",
 			"meanings": [
 				"Abby's college"
+			]
+		},
+		"pizza": {
+			"word": "Pizza",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Jeremy's favorite food",
+				"Abby's would-be favorite food if she weren't lactose intolerant"
+			]
+		},
+		"geode": {
+			"word": "Geode",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby's family likes gems and minerals",
+			]
+		},
+		"magic": {
+			"word": "Magic: The Gathering",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Jeremy's favorite game",
+				"Abby plays sometimes too"
+			]
+		},
+		"wuhan": {
+			"word": "Wuhan",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby's birthplace",
+			]
+		},
+		"antarctica": {
+			"word": "Antarctica",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby and Jeremy's honeymoon destination",
+			]
+		},
+		"little cupcake": {
+			"word": "Little Cupcake Bakeshop",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"The location of Abby and Jeremy's first date",
+			]
+		},
+		"sidewalk labs": {
+			"word": "Sidewalk Labs",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"An urban innovation company",
+				"Jeremy's workplace"
+			]
+		},
+		"nerds": {
+			"word": "Nerds",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby and Jeremy",
 			]
 		},
 	},

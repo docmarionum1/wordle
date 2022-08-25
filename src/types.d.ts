@@ -51,6 +51,7 @@ type DictionaryEntry = {
 	phonetics: Phonetic[];
 	origin: string;
 	meanings: Meaning[];
+	partOfSpeech: string;
 };
 
 type Meaning = {

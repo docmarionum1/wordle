@@ -35,7 +35,11 @@
 	state = JSON.parse(localStorage.getItem(`state`)) || createNewGame();
 
 	// If the version has changed, reset the stats and state, this is to just clear 
-	if (version !== previous_version || state.board.state[0].length !== targets.words[state.wordNumber].length) {
+	if (
+		(version !== previous_version) || 
+		(state.wordNumber >= targets.words.length) ||
+		(state.board.state[0].length !== targets.words[state.wordNumber].length) 
+	) {
 		stats = createDefaultStats();
 		state = createNewGame();
 	}

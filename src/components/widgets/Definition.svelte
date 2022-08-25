@@ -38,9 +38,6 @@ import { targets } from "../../utils";
 		<h2>{data.word}</h2>
 		<em>{data.partOfSpeech}</em>
 		<ol>
-			{#if word !== data.word.toLowerCase()}
-				<li>variant of {data.word}.</li>
-			{/if}
 			{#each data.meanings.slice(0, 1 + alternates - (word !== data.word ? 1 : 0)) as def}
 				<li>{def}</li>
 			{/each}
