@@ -20,7 +20,6 @@ type LetterState = "🔳" | "⬛" | "🟨" | "🟩";
 type GameState = {
 	active: boolean,
 	guesses: number,
-	time: number,
 	wordNumber: number,
 	validHard: boolean,
 	board: GameBoard,
@@ -32,7 +31,7 @@ type GameBoard = {
 };
 
 type Settings = {
-	hard: boolean[],
+	hard: boolean,
 	dark: boolean,
 	colorblind: boolean,
 	tutorial: 0 | 1 | 2 | 3,
@@ -43,7 +42,7 @@ type SettingType = "switch" | "dropdown";
 type Word = {
 	daily: string,
 	infinite: string,
-	getState: (char: string, index: number, mode: GameMode) => LetterState,
+	getState: (char: string, index: number) => LetterState,
 };
 
 type DictionaryEntry = {
@@ -87,22 +86,6 @@ type Guesses = {
 	"5": number;
 	"6": number;
 	"fail": number;
-};
-
-type ModeData = {
-	default: GameMode,
-	modes: Mode[],
-};
-
-type Mode = {
-	name: string,
-	unit: number,
-	start: number,
-	seed: number,
-	historical: boolean,
-	icon?: string,
-	streak?: boolean,
-	useTimeZone?: boolean,
 };
 
 type HardModeData = {

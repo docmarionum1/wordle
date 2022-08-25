@@ -1,23 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher, getContext } from "svelte";
 	import { scale, fade } from "svelte/transition";
-	import { mode } from "../stores";
-	import { modeData, timeRemaining } from "../utils";
 	import GameIcon from "./GameIcon.svelte";
 	import type { Toaster } from "./widgets";
 
 	export let showStats: boolean;
-	export let tutorial: boolean;
-	export let showRefresh: boolean;
-
-	export let toaster = getContext<Toaster>("toaster");
 
 	const dispatch = createEventDispatcher();
-	mode.subscribe((m) => {
-		if (timeRemaining(modeData.modes[m]) > 0) {
-			showRefresh = false;
-		}
-	});
 </script>
 
 <header>

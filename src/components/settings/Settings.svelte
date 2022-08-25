@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { getContext, onMount } from "svelte";
 
-	import { mode, settings } from "../../stores";
-	import { modeData } from "../../utils";
+	import { settings } from "../../stores";
 	import type { Toaster } from "../widgets";
 	import Setting from "./Setting.svelte";
 
@@ -37,7 +36,7 @@
 				}
 			}}
 		>
-			<Setting type="switch" bind:value={$settings.hard[$mode]} disabled={!state.validHard}>
+			<Setting type="switch" bind:value={$settings.hard} disabled={!state.validHard}>
 				<span slot="title">Hard Mode</span>
 				<span slot="desc">Any revealed hints must be used in subsequent guesses</span>
 			</Setting>

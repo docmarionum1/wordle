@@ -1,23 +1,23 @@
 <script lang="ts">
 	import type Toaster from "./Toaster.svelte";
 
-	import { mode } from "../../stores";
-	import { failed, modeData } from "../../utils";
+	import { failed } from "../../utils";
 	import { getContext } from "svelte";
 
 	export let state: GameState;
 	const toaster = getContext<Toaster>("toaster");
 
-	$: stats = `${modeData.modes[$mode].name} Wordle+ #${state.wordNumber} ${
+	$: stats = `Jerbigwordle+ #${state.wordNumber} ${
 		failed(state) ? "X" : state.guesses
 	}/${state.board.words.length}\n\n    ${state.board.state
 		.slice(0, state.guesses)
 		.map((r) => r.join(""))
-		.join("\n    ")}\nmikhad.github.io/wordle`;
+		.join("\n    ")}\nwordle.jerbigail.com`;
 </script>
 
 <div
 	on:click={() => {
+		console.log(stats);
 		navigator.clipboard.writeText(stats);
 		toaster.pop("Copied");
 	}}
@@ -37,7 +37,7 @@
 		font-size: var(--fs-medium);
 		text-transform: uppercase;
 		font-weight: bold;
-		background: var(--color-correct);
+		background: var(--color-present);
 		border-radius: 4px;
 		height: 52px;
 		display: flex;
@@ -49,5 +49,6 @@
 		&:hover {
 			opacity: 0.9;
 		}
+		margin: auto
 	}
 </style>

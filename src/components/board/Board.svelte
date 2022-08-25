@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getRowData, words } from "../../utils";
+	import { getRowData, targets, words } from "../../utils";
 
 	import Row from "./Row.svelte";
 	import ContextMenu from "../widgets/ContextMenu.svelte";
@@ -9,7 +9,6 @@
 	export let value: string[];
 	export let board: GameBoard;
 	export let guesses: number;
-	export let icon: string;
 	export let tutorial: boolean;
 	export function shake(row: number) {
 		rows[row].shake();
@@ -39,7 +38,7 @@
 
 			const match = getRowData(num, board);
 			pAns = words.words.filter((w) => match(w)).length;
-			pSols = pAns + words.valid.filter((w) => match(w)).length;
+			pSols = pAns + targets.words.filter((w) => match(w)).length;
 		}
 	}
 </script>
@@ -60,11 +59,6 @@
 			length={board.state[i].length}
 		/>
 	{/each}
-	{#if icon}
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-			<path d={icon} stroke-width="14" />
-		</svg>
-	{/if}
 	{#if tutorial}
 		<div transition:scale class="tutorial" on:click={() => dispatch("closeTutPopUp")}>
 			double tap (right click) a row to see a word's definition, or how many words could be
@@ -86,18 +80,6 @@
 		padding: 10px;
 		position: relative;
 		align-content: center;
-	}
-	svg {
-		position: absolute;
-		z-index: -1;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: min(130%, 100vw);
-		max-height: 100%;
-	}
-	path {
-		stroke: var(--bg-secondary);
 	}
 	.tutorial {
 		top: calc(100 / var(--rows) * 1%);

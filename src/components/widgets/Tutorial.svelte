@@ -20,8 +20,11 @@
 	<div class="row">
 		<Tile value="A" state="🟩" />
 		<Tile value="b" state="🔳" />
-		<Tile value="b" state="🔳" />
-		<Tile value="y" state="🔳" />
+		<Tile value="i" state="🔳" />
+		<Tile value="g" state="🔳" />
+		<Tile value="a" state="🔳" />
+		<Tile value="i" state="🔳" />
+		<Tile value="l" state="🔳" />
 	</div>
 	<div>The letter <strong>A</strong> is in the word and in the correct spot.</div>
 	<div class="row">
@@ -31,6 +34,7 @@
 		<Tile value="e" state="🔳" />
 		<Tile value="m" state="🔳" />
 		<Tile value="y" state="🔳" />
+		<Tile value="🙃" state="🔳" />
 	</div>
 	<div>The letter <strong>R</strong> is in the word but in the wrong spot.</div>
 	<div class="row">

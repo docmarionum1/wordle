@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onDestroy } from "svelte/internal";
-	import { letterStates, mode } from "../../stores";
+	import { letterStates } from "../../stores";
 	import { keys } from "../../utils";
 	import Key from "./Key.svelte";
 
@@ -34,12 +34,8 @@
 		if (e.key === "Escape") dispatch("esc");
 	}
 
-	// Ensure keys change on load instead of loading their state color & change the color of all the keys to neutral, then to their correct color on mode change
-	const unsub = mode.subscribe(() => {
-		preventChange = true;
-		setTimeout(() => (preventChange = false), 200);
-	});
-	onDestroy(unsub);
+	preventChange = true;
+	setTimeout(() => (preventChange = false), 200);
 </script>
 
 <svelte:body on:keydown={handleKeystroke} />

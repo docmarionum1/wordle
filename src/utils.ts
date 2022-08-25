@@ -1,5 +1,3 @@
-import seedrandom from "seedrandom";
-import { GameMode, ms } from "./enums";
 import wordList from "./dictionary";
 
 export const ROWS = 6;
@@ -15,16 +13,47 @@ export const words = {
 export const targets = {
 	words: [
 		//"prospectplace",
-		"pizza",
-		"abigail",
-		"ios",
-		"jeremy",
-		"barnard",
-		"litter",
+		//"pizza",
+		// "abigail",
+		// "ios",
+		// "jeremy",
+		// "barnard",
+		// "litter",
 		"prospect",
 		"subway",
 
 	],
+
+	definitions: {
+		"abigail": {
+			"word": "Abigail",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"variant of Abby",
+				"The bride",
+			]
+		},
+		"ios": {
+			"word": "iOS",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Jeremy and Abby's cat"
+			]
+		},
+		"barnard": {
+			"word": "Barnard",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby's college"
+			]
+		},
+	},
 
 	contains: (word: string) => {
 		return targets.words.includes(word);
@@ -36,7 +65,6 @@ export function isValidWord(word:string) : boolean {
 }
 
 export function checkHardMode(board: GameBoard, row: number): HardModeData {
-	console.log("chm", board, row);
 	const cols = board.state[0].length;
 
 	for (let i = 0; i < cols; ++i) {
@@ -76,7 +104,6 @@ class WordData {
 		}
 	}
 	confirmCount(char: string) {
-		console.log("cc", this,  char);
 
 		let c = this.letterCounts.get(char);
 		if (!c) {
@@ -90,7 +117,6 @@ class WordData {
 		return val ? val[1] : false;
 	}
 	setCount(char: string, count: number) {
-		console.log("sc", this,  char, count);
 		let c = this.letterCounts.get(char);
 		if (!c) {
 			this.letterCounts.set(char, [count, false]);
@@ -166,10 +192,8 @@ function countOccurences<T>(arr: T[], val: T) {
 }
 
 export function getState(word: string, guess: string): LetterState[] {
-	console.log("gs", word, guess);
 	const charArr = word.split("");
 	const result = Array<LetterState>(word.length).fill("⬛");
-	console.log(result);
 	for (let i = 0; i < word.length; ++i) {
 		if (charArr[i] === guess.charAt(i)) {
 			result[i] = "🟩";
@@ -197,36 +221,6 @@ export function contractNum(n: number) {
 
 export const keys = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
 
-export function newSeed(mode: GameMode) {
-	const now = Date.now();
-	switch (mode) {
-		case GameMode.infinite:
-			return now - (now % ms.SECOND);
-	}
-}
-
-export const modeData: ModeData = {
-	default: GameMode.infinite,
-	modes: [
-		{
-			name: "Infinite",
-			unit: ms.SECOND,
-			start: 1642428600000,	// 17/01/2022 4:10:00pm UTC+2
-			seed: newSeed(GameMode.infinite),
-			historical: false,
-			icon: "",
-		},
-	]
-};
-
-export function getWordNumber() {
-	return 0;
-}
-
-export function getWord(): string {
-	return targets.words[getWordNumber()];
-}
-
 export const DELAY_INCREMENT = 200;
 
 export const PRAISE = [
@@ -238,13 +232,12 @@ export const PRAISE = [
 	"Phew",
 ];
 
-export function createNewGame(mode: GameMode): GameState {
-	const word_number = getWordNumber();
-	const word = getWord();
+export function createNewGame(state?: GameState): GameState {
+	const word_number = state ? state.wordNumber + 1 : 0;
+	const word = targets.words[word_number];
 	return {
 		active: true,
 		guesses: 0,
-		time: modeData.modes[mode].seed,
 		wordNumber: word_number,
 		validHard: true,
 		board: {
@@ -256,14 +249,14 @@ export function createNewGame(mode: GameMode): GameState {
 
 export function createDefaultSettings(): Settings {
 	return {
-		hard: new Array(modeData.modes.length).map(() => false),
+		hard: false,
 		dark: false,
 		colorblind: false,
 		tutorial: 3,
 	};
 }
 
-export function createDefaultStats(mode: GameMode): Stats {
+export function createDefaultStats(): Stats {
 	const stats = {
 		played: 0,
 		lastGame: 0,
@@ -277,7 +270,7 @@ export function createDefaultStats(mode: GameMode): Stats {
 			6: 0,
 		}
 	};
-	if (!modeData.modes[mode].streak) return stats;
+
 	return {
 		...stats,
 		streak: 0,
@@ -314,13 +307,6 @@ export function createLetterStates(): { [key: string]: LetterState; } {
 		y: "🔳",
 		z: "🔳",
 	};
-}
-
-export function timeRemaining(m: Mode) {
-	if (m.useTimeZone) {
-		return m.unit - (Date.now() - (m.seed + new Date().getTimezoneOffset() * ms.MINUTE));
-	}
-	return m.unit - (Date.now() - m.seed);
 }
 
 export function failed(s: GameState) {

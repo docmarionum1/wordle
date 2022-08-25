@@ -11,7 +11,7 @@
 		animation = "shake";
 	}
 	export function bounce() {
-		tiles.forEach((e) => e.bounce());
+		tiles.forEach((e) => e && e.bounce());
 	}
 	const dispatch = createEventDispatcher();
 	let animation = "";

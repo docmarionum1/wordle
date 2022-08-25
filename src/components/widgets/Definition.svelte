@@ -3,22 +3,31 @@
 </script>
 
 <script lang="ts">
+import { targets } from "../../utils";
+
+
 	export let word: string;
 	/** The maximum number of alternate definitions to provide*/
 	export let alternates = 9;
 
 	async function getWordData(word: string): Promise<DictionaryEntry> {
-		if (!cache.has(word)) {
-			const data = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`, {
-				mode: "cors",
-			});
-			if (data.ok) {
-				cache.set(word, (await data.json())[0]);
-			} else {
-				throw new Error(`Failed to fetch definition`);
-			}
+		// if (!cache.has(word)) {
+		// 	const data = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`, {
+		// 		mode: "cors",
+		// 	});
+		// 	if (data.ok) {
+		// 		cache.set(word, (await data.json())[0]);
+		// 	} else {
+		// 		throw new Error(`Failed to fetch definition`);
+		// 	}
+		// }
+		// return cache.get(word);
+
+		if (word in targets.definitions) {
+			return await targets.definitions[word];
 		}
-		return cache.get(word);
+
+		throw new Error(`Failed to fetch definition`);
 	}
 </script>
 
@@ -26,14 +35,14 @@
 	{#await getWordData(word)}
 		<h4>Fetching definition...</h4>
 	{:then data}
-		<h2>{word}</h2>
-		<em>{data.meanings[0].partOfSpeech}</em>
+		<h2>{data.word}</h2>
+		<em>{data.partOfSpeech}</em>
 		<ol>
-			{#if word !== data.word}
+			{#if word !== data.word.toLowerCase()}
 				<li>variant of {data.word}.</li>
 			{/if}
-			{#each data.meanings[0].definitions.slice(0, 1 + alternates - (word !== data.word ? 1 : 0)) as def}
-				<li>{def.definition}</li>
+			{#each data.meanings.slice(0, 1 + alternates - (word !== data.word ? 1 : 0)) as def}
+				<li>{def}</li>
 			{/each}
 		</ol>
 	{:catch}
@@ -42,6 +51,9 @@
 </div>
 
 <style>
+	.def {
+		padding: 5px
+	}
 	h2 {
 		display: inline-block;
 		margin-right: 1rem;

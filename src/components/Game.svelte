@@ -8,14 +8,11 @@
 	import Settings from "./settings";
 	import {
 		Share,
-		Seperator,
 		Definition,
 		Tutorial,
 		Statistics,
 		Distribution,
-		Timer,
 		Toaster,
-		ShareGame,
 		Tips,
 	} from "./widgets";
 	import {
@@ -23,18 +20,15 @@
 		DELAY_INCREMENT,
 		PRAISE,
 		getState,
-		modeData,
 		checkHardMode,
 		ROWS,
-		newSeed,
 		createNewGame,
 		createLetterStates,
 		words,
-		getWordNumber,
 		targets,
-isValidWord,
+		isValidWord,
 	} from "../utils";
-	import { letterStates, settings, mode } from "../stores";
+	import { letterStates, settings } from "../stores";
 
 	export let word: string;
 	export let stats: Stats;
@@ -53,21 +47,19 @@ isValidWord,
 	let showRefresh = false;
 
 	let board: Board;
-	let timer: Timer;
 	let tips: Tips;
 
 	let tip = 0;
 	$: if (showSettings && tips) tip = Math.floor(tips.length * Math.random());
 
 	function submitWord() {
-		console.log('sw', word, game.board.words[game.guesses]);
 		if (game.board.words[game.guesses].length !== word.length) {
 			toaster.pop("Not enough letters");
 			board.shake(game.guesses);
 		} else if (isValidWord(game.board.words[game.guesses])) {
 			if (game.guesses > 0) {
 				const hm = checkHardMode(game.board, game.guesses);
-				if ($settings.hard[$mode]) {
+				if ($settings.hard) {
 					if (hm.type === "🟩") {
 						toaster.pop(
 							`${contractNum(hm.pos + 1)} letter must be ${hm.char.toUpperCase()}`
@@ -108,31 +100,26 @@ isValidWord,
 			DELAY_INCREMENT * word.length + DELAY_INCREMENT
 		);
 		setTimeout(setShowStatsTrue, delay * 1.4);
-		if (!modeData.modes[$mode].historical) {
-			++stats.guesses[game.guesses];
-			++stats.played;
-			if ("streak" in stats) {
-				stats.streak =
-					modeData.modes[$mode].seed - stats.lastGame > modeData.modes[$mode].unit
-						? 1
-						: stats.streak + 1;
-				if (stats.streak > stats.maxStreak) stats.maxStreak = stats.streak;
-			}
-			stats.lastGame = modeData.modes[$mode].seed;
-			localStorage.setItem(`stats-${$mode}`, JSON.stringify(stats));
+		
+		++stats.guesses[game.guesses];
+		++stats.played;
+		if ("streak" in stats) {
+			stats.streak = stats.streak + 1;
+			if (stats.streak > stats.maxStreak) stats.maxStreak = stats.streak;
 		}
+		stats.lastGame = game.wordNumber;
+		localStorage.setItem(`stats`, JSON.stringify(stats));
+		
 	}
 
 	function lose() {
 		game.active = false;
 		setTimeout(setShowStatsTrue, delay);
-		if (!modeData.modes[$mode].historical) {
-			++stats.guesses.fail;
-			++stats.played;
-			if ("streak" in stats) stats.streak = 0;
-			stats.lastGame = modeData.modes[$mode].seed;
-			localStorage.setItem(`stats-${$mode}`, JSON.stringify(stats));
-		}
+		++stats.guesses.fail;
+		++stats.played;
+		stats.streak = 0;
+		stats.lastGame = game.wordNumber;
+		localStorage.setItem(`stats`, JSON.stringify(stats));
 	}
 
 	function concede() {
@@ -142,15 +129,11 @@ isValidWord,
 	}
 
 	function reload() {
-		console.log("Hello, when does this get falled", $mode);
-		modeData.modes[$mode].historical = false;
-		modeData.modes[$mode].seed = newSeed($mode);
-		game = createNewGame($mode);
-		word = targets.words[getWordNumber()];
+		game = createNewGame(game);
+		word = targets.words[game.wordNumber];
 		$letterStates = createLetterStates();
 		showStats = false;
 		showRefresh = false;
-		timer.reset($mode);
 	}
 
 	function setShowStatsTrue() {
@@ -170,11 +153,10 @@ isValidWord,
 		bind:showRefresh
 		tutorial={$settings.tutorial === 2}
 		on:closeTutPopUp|once={() => ($settings.tutorial = 1)}
-		showStats={stats.played > 0 || (modeData.modes[$mode].historical && !game.active)}
+		showStats={stats.played > 0}
 		on:stats={() => (showStats = true)}
 		on:tutorial={() => (showTutorial = true)}
 		on:settings={() => (showSettings = true)}
-		on:reload={reload}
 	/>
 	<Board
 		bind:this={board}
@@ -183,7 +165,6 @@ isValidWord,
 		on:closeTutPopUp|once={() => ($settings.tutorial = 0)}
 		board={game.board}
 		guesses={game.guesses}
-		icon={modeData.modes[$mode].icon}
 	/>
 	<Keyboard
 		on:keystroke={() => {
@@ -211,27 +192,31 @@ isValidWord,
 </Modal>
 
 <Modal bind:visible={showStats}>
-	{#if modeData.modes[$mode].historical}
-		<h2 class="historical">Statistics not available for historical games</h2>
-	{:else}
-		<Statistics data={stats} />
-		<Distribution distribution={stats.guesses} {game} />
-	{/if}
-	<Seperator visible={!game.active}>
-		<Timer
-			slot="1"
-			bind:this={timer}
-			on:timeup={() => (showRefresh = true)}
-			on:reload={reload}
-		/>
-		<Share slot="2" state={game} />
-	</Seperator>
-	<ShareGame wordNumber={game.wordNumber} />
+	<h3>Jerbiwordle # {game.wordNumber+1} / {targets.words.length}</h3>
 	{#if !game.active}
 		<Definition {word} alternates={2} />
+		{#if ((game.wordNumber+1) < targets.words.length)}
+			<div class="next" on:click={() => reload()}>
+				Next word
+				<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+					<path
+						fill="white"
+						d="M12 8V4l8 8-8 8v-4H4V8z"
+					/>
+				</svg>
+			</div>
+		{/if}
+		
 	{:else}
 		<!-- Fade with delay is to prevent a bright red button from appearing as soon as refresh is pressed -->
 		<div in:fade={{ delay: 300 }} class="concede" on:click={concede}>give up</div>
+	{/if}
+	
+	<Statistics data={stats} />
+	<Distribution distribution={stats.guesses} {game} />
+
+	{#if !game.active}
+		<Share state={game} />
 	{/if}
 </Modal>
 
@@ -253,7 +238,7 @@ isValidWord,
 					toaster.pop("localStorage cleared");
 				}}
 			>
-				{modeData.modes[$mode].name} word #{game.wordNumber}
+				word #{game.wordNumber}
 			</div>
 		</div>
 	</div>
@@ -270,12 +255,6 @@ isValidWord,
 		margin: auto;
 		position: relative;
 	}
-	.historical {
-		text-align: center;
-		margin-top: 10px;
-		padding: 0 20px;
-		text-transform: uppercase;
-	}
 	.concede {
 		margin-top: 15px;
 		text-transform: uppercase;
@@ -290,5 +269,38 @@ isValidWord,
 		&:hover {
 			opacity: 0.9;
 		}
+	}
+	.button {
+		height: 45px;
+		aspect-ratio: 1;
+		padding: 4px;
+		background: var(--color-correct);
+		border-radius: 4px;
+		cursor: pointer;
+		margin: auto;
+		fill: white;
+	}
+	.button:hover {
+		opacity: 0.9;
+	}
+	.next {
+		color: #fff;
+		font-size: var(--fs-medium);
+		line-height: var(--fs-medium);
+		text-transform: uppercase;
+		font-weight: bold;
+		background: var(--color-correct);
+		border-radius: 4px;
+		height: 52px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		width: 80%;
+		cursor: pointer;
+		&:hover {
+			opacity: 0.9;
+		}
+		margin: auto;
 	}
 </style>
