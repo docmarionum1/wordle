@@ -12,8 +12,7 @@
 		Tutorial,
 		Statistics,
 		Distribution,
-		Toaster,
-		Tips,
+		Toaster
 	} from "./widgets";
 	import {
 		contractNum,
@@ -47,10 +46,6 @@
 	let showRefresh = false;
 
 	let board: Board;
-	let tips: Tips;
-
-	let tip = 0;
-	$: if (showSettings && tips) tip = Math.floor(tips.length * Math.random());
 
 	function submitWord() {
 		if (game.board.words[game.guesses].length !== word.length) {
@@ -165,6 +160,7 @@
 		on:closeTutPopUp|once={() => ($settings.tutorial = 0)}
 		board={game.board}
 		guesses={game.guesses}
+		target={word}
 	/>
 	<Keyboard
 		on:keystroke={() => {
@@ -180,6 +176,7 @@
 		}}
 		disabled={!game.active || $settings.tutorial === 3}
 		word_length={game.board.state[0].length}
+		target={word}
 	/>
 </main>
 

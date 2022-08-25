@@ -10,6 +10,7 @@
 	export let board: GameBoard;
 	export let guesses: number;
 	export let tutorial: boolean;
+	export let target: string;
 	export function shake(row: number) {
 		rows[row].shake();
 	}
@@ -57,6 +58,7 @@
 			state={board.state[i]}
 			on:ctx={(e) => context(e.detail.x, e.detail.y, i, value[i])}
 			length={board.state[i].length}
+			target={target}
 		/>
 	{/each}
 	{#if tutorial}

@@ -19,9 +19,18 @@ export const targets = {
 		// "jeremy",
 		// "barnard",
 		// "litter",
-		"prospect",
-		"subway",
-
+		//"prospect place",
+		//"subway",
+		"pizza",
+		"geode",
+		"magic",
+		"wuhan",
+		"abby",
+		"ios",
+		"barnard",
+		"antarctica",
+		"little cupcake",
+		"sidewalk labs",
 	],
 
 	definitions: {
@@ -61,7 +70,13 @@ export const targets = {
 };
 
 export function isValidWord(word:string) : boolean {
-	return words.contains(word) || targets.contains(word);
+	
+	// return words.contains(word) || targets.contains(word);
+	// if () {
+	// 	return true;
+	// }
+
+	return targets.contains(word) || word.split(" ").map(w => words.contains(w)).reduce((a, b) => a && b);
 }
 
 export function checkHardMode(board: GameBoard, row: number): HardModeData {

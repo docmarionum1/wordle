@@ -7,6 +7,7 @@
 	export let value = "";
 	export let disabled = false;
 	export let word_length: number;
+	export let target: string;
 	let preventChange = true;
 
 	const dispatch = createEventDispatcher();
@@ -15,11 +16,21 @@
 		if (!disabled && value.length < word_length) {
 			dispatch("keystroke", char);
 			value += char;
+
+			// Handle space, skip it
+			if (target.charAt(value.length) == " ") {
+				value += " ";
+			}
 		}
 	}
 	function backspaceValue() {
 		if (!disabled) {
 			value = value.slice(0, value.length - 1);
+
+			// If at a space, backspace again
+			if (target.charAt(value.length) == " ") {
+				value = value.slice(0, value.length - 1);
+			}
 		}
 	}
 	function handleKeystroke(e: KeyboardEvent) {

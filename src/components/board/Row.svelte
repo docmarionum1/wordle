@@ -7,6 +7,7 @@
 	export let value = "";
 	export let state: LetterState[];
 	export let length: number;
+	export let target: string;
 	export function shake() {
 		animation = "shake";
 	}
@@ -27,7 +28,12 @@
 	class:complete={guesses > num}
 >
 	{#each Array(length) as _, i}
-		<Tile bind:this={tiles[i]} state={state[i]} value={value.charAt(i)} position={i} />
+		<Tile 
+			bind:this={tiles[i]} 
+			state={state[i]} 
+			value={target.charAt(i) == " " ? " " : value.charAt(i)} 
+			position={i} 
+		/>
 	{/each}
 </div>
 

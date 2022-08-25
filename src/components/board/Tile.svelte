@@ -38,8 +38,10 @@
 	class="tile {state} {s}"
 	style="transition-delay: {position * DELAY_INCREMENT}ms"
 >
-	<div class="front">{value}</div>
-	<div class="back">{value}</div>
+	{#if value != " "}
+		<div class="front">{value}</div>
+		<div class="back">{value}</div>
+	{/if}
 </div>
 
 <style lang="scss">

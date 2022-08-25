@@ -15,6 +15,7 @@
 
 	export let version: string;
 	setContext("version", version);
+	const previous_version = localStorage.getItem("version") || version;
 	localStorage.setItem("version", version);
 
 	let stats: Stats;
@@ -30,9 +31,19 @@
 
 	// Load stats if it exists
 	stats = (JSON.parse(localStorage.getItem(`stats`)) as Stats) || createDefaultStats();
-
 	// Load state if it exists
 	state = JSON.parse(localStorage.getItem(`state`)) || createNewGame();
+
+	// If the version has changed, reset the stats and state, this is to just clear 
+	if (version !== previous_version || state.board.state[0].length !== targets.words[state.wordNumber].length) {
+		stats = createDefaultStats();
+		state = createNewGame();
+	}
+
+	// Make sure local storage is updated in case there are any reloads
+	localStorage.setItem(`state`, JSON.stringify(state));
+	localStorage.setItem(`stats`, JSON.stringify(stats));
+
 	word = targets.words[state.wordNumber];
 
 	// Set the letter states when data for a new game mode is loaded so the keyboard is correct
@@ -56,7 +67,7 @@
 	}
 	let toaster: Toaster;
 
-	document.title = "Wordle+ | An infinite word guessing game";
+	document.title = "Jerbiwordle";
 </script>
 
 <Toaster bind:this={toaster} />
