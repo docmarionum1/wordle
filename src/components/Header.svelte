@@ -18,7 +18,7 @@
 		</GameIcon>
 	</div>
 	<h1 class="title">
-		jerbigordle
+		jerbiwordle
 	</h1>
 	<div class="icons">
 		{#if showStats}

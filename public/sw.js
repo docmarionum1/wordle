@@ -1,6 +1,6 @@
 //! IF ANYTHING IN THIS FILE IS CHANGED MAKE SURE setVersion.js HAS ALSO BEEN UPDATED
 // Increase the v number when the app is updated
-const cacheName = "jerbigordle-v1.3.2";
+const cacheName = "jerbiwordle-v1.3.2";
 
 const assetsToCache = [
 	"./",

@@ -6,9 +6,9 @@
 </script>
 
 <h3>how to play</h3>
-<div>Guess the <strong>JERBIGORDLE</strong> in {ROWS} tries.</div> 
+<div>Guess the <strong>JERBIWORDLE</strong> in {ROWS} tries.</div> 
 
-<div>A <strong>JERBIGORDLE</strong> is a word related to or significant to Abby and Jeremy.</div>
+<div>A <strong>JERBIWORDLE</strong> is a word related to or significant to Abby and Jeremy.</div>
 
 <div>Each guess must be a valid word. Hit the enter button to submit.</div>
 <div>
