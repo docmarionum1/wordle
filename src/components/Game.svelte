@@ -251,6 +251,9 @@
 		max-width: var(--game-width);
 		margin: auto;
 		position: relative;
+		@media (orientation: landscape) {
+			padding-bottom: 10px;
+		}
 	}
 	.concede {
 		margin-top: 15px;

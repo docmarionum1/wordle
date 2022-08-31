@@ -72,6 +72,13 @@
 	let toaster: Toaster;
 
 	document.title = "Jerbiwordle";
+
+	window.addEventListener("load",function() {
+		setTimeout(function(){
+			// This hides the address bar:
+			window.scrollTo(0, 1);
+		}, 0);
+	});
 </script>
 
 <Toaster bind:this={toaster} />

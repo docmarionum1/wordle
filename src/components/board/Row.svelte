@@ -32,7 +32,8 @@
 			bind:this={tiles[i]} 
 			state={state[i]} 
 			value={target.charAt(i) == " " ? " " : value.charAt(i)} 
-			position={i} 
+			position={i}
+			word_length={state.length} 
 		/>
 	{/each}
 </div>

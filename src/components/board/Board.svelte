@@ -48,7 +48,7 @@
 	<ContextMenu {pAns} {pSols} {x} {y} {word} />
 {/if}
 
-<div class="board">
+<div class="board" style="aspect-ratio: {board.state[0].length} / 6">
 	{#each value as _, i}
 		<Row
 			num={i}
@@ -75,13 +75,21 @@
 		display: grid;
 		grid-template-rows: repeat(var(--rows));
 		gap: 5.5px;
-		max-height: 420px;
+		max-height: 50vh;
 		max-width: 100%;
 		flex-grow: 1;
-		aspect-ratio: var(--cols) / var(--rows);
 		padding: 10px;
 		position: relative;
 		align-content: center;
+	}
+	@media (orientation: portrait) {
+		@supports (-webkit-appearance:none) and (stroke-color:transparent) {
+			.board {
+				width: 100%;
+			}
+		}
+
+		
 	}
 	.tutorial {
 		top: calc(100 / var(--rows) * 1%);

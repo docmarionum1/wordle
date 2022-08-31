@@ -96,6 +96,8 @@
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: 2px;
+		flex: 1;
+		max-height: 25vh;
 	}
 	.row {
 		touch-action: manipulation;
@@ -104,6 +106,7 @@
 		margin: 0 auto 8px;
 		padding: 0 8px;
 		gap: 6px;
+		flex: 1;
 	}
 	.row:nth-of-type(2) {
 		padding: 0 30px;

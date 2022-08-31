@@ -6,12 +6,14 @@
 	export let value = "";
 	export let state: LetterState;
 	export let position = 0;
+	export let word_length: number;
 	export function bounce() {
 		setTimeout(() => (animation = "bounce"), (ROWS + position) * DELAY_INCREMENT);
 	}
 	let s: string;
 	let pop = false;
 	let animation = "";
+	
 
 	// reset animation when value changes, because for some reason changing anination to "" when the game is over causes the tiles to flash
 	$: !value && (animation = "");
@@ -36,11 +38,30 @@
 	class:value
 	class:pop
 	class="tile {state} {s}"
-	style="transition-delay: {position * DELAY_INCREMENT}ms"
+	style="transition-delay: {position * DELAY_INCREMENT}ms; font-size: calc(min(34vw, 28vh, 140px) / {word_length}); line-height: calc(min(34vw, 24vh, 140px) / {word_length})"
 >
 	{#if value != " "}
-		<div class="front">{value}</div>
-		<div class="back">{value}</div>
+		<div class="front">
+			<svg>
+				<text 
+					x="50%" y="50%" 
+					text-anchor="middle" 
+					dominant-baseline="central"
+					font-size="min(5vh, 5vw)"
+				>{value}</text>
+			</svg>
+		</div>
+		<div class="back">
+			<svg>
+				<text 
+					x="50%" y="50%" 
+					text-anchor="middle" 
+					dominant-baseline="central"
+					font-size="min(5vh, 5vw)" 
+					fill="white"
+				>{value}</text>
+			</svg>
+		</div>
 	{/if}
 </div>
 
@@ -57,7 +78,6 @@
 		}
 	}
 	.tile {
-		//font-size: 2rem;
 		font-weight: bold;
 		text-transform: uppercase;
 		position: relative;
@@ -76,6 +96,11 @@
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		transition: transform 0s ease-in-out;
+
+		svg {
+			width: 100%;
+			height: 100%;
+		}
 	}
 	.front {
 		border: 2px solid var(--border-primary);
