@@ -235,7 +235,7 @@
 					toaster.pop("localStorage cleared");
 				}}
 			>
-				word #{game.wordNumber}
+				word #{game.wordNumber + 1}
 			</div>
 		</div>
 	</div>
