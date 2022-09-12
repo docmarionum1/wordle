@@ -12,7 +12,7 @@
 	}/${state.board.words.length}\n\n    ${state.board.state
 		.slice(0, state.guesses)
 		.map((r) => r.join(""))
-		.join("\n    ")}\nwordle.jerbigail.com`;
+		.join("\n    ")}\n\nwordle.jerbigail.com`;
 </script>
 
 <div
