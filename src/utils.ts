@@ -12,22 +12,25 @@ export const words = {
 
 export const targets = {
 	words: [
-		// "abigail",
-		// "litter",
-		//"prospect place",
-		//"subway",
+		"ferry",
 		"pizza",
 		"nerds",
 		"geode",
 		"magic",
-		//"wuhan",
-		"abby",
-		"jeremy",
+		"donut",
+		"haiku",
 		"ios",
-		//"barnard",
+		"waffle",
+		"python",
+		"museum",
+		"podcast",
+		"brooklyn",
+		"computer",
 		"antarctica",
-		//"little cupcake",
-		"sidewalk labs",
+		"park slope",
+		"snug harbor",
+		"prospect place",
+		"little cupcake",
 	],
 
 	definitions: {
@@ -83,7 +86,7 @@ export const targets = {
 			"origin": "",
 			"partOfSpeech": "noun",
 			"meanings": [
-				"Abby's family likes gems and minerals",
+				"Abby's family likes gems and minerals, especially geodes",
 			]
 		},
 		"magic": {
@@ -120,7 +123,7 @@ export const targets = {
 			"origin": "",
 			"partOfSpeech": "noun",
 			"meanings": [
-				"The location of Abby and Jeremy's first date",
+				"The bakery where Abby and Jeremy has their first date",
 			]
 		},
 		"sidewalk labs": {
@@ -140,6 +143,114 @@ export const targets = {
 			"partOfSpeech": "noun",
 			"meanings": [
 				"Abby and Jeremy",
+			]
+		},
+		"prospect place": {
+			"word": "Prospect Place",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"The street Abby and Jeremy live on",
+			]
+		},
+		"ferry": {
+			"word": "Ferry",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"You might be taking this to the wedding",
+			]
+		},
+		"donut": {
+			"word": "Donut",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby and Jeremy get these for each other sometimes as gifts",
+			]
+		},
+		"haiku": {
+			"word": "Haiku",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Jeremy's favorite poetic form",
+			]
+		},
+		"waffle": {
+			"word": "Waffle",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby and Jeremy like making these for each other on Saturday mornings",
+			]
+		},
+		"python": {
+			"word": "Python",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Jeremy's second language",
+			]
+		},
+		"museum": {
+			"word": "Museum",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby works at one of these",
+			]
+		},
+		"podcast": {
+			"word": "Podcast",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Abby and Jeremy listen to these together when cleaning and cooking",
+			]
+		},
+		"brooklyn": {
+			"word": "Brooklyn",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"Where Abby and Jeremy grew up",
+			]
+		},
+		"computer": {
+			"word": "Computer",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"At the center of Jeremy’s career",
+			]
+		},
+		"park slope": {
+			"word": "Park Slope",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"the neighborhood where Abby grew up and where her parents still reside",
+			]
+		},
+		"snug harbor": {
+			"word": "Snug Harbor",
+			"phonetic": "",
+			"origin": "",
+			"partOfSpeech": "noun",
+			"meanings": [
+				"The location of the wedding",
 			]
 		},
 	},
