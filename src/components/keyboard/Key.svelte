@@ -19,8 +19,8 @@
 		font-weight: bold;
 		text-transform: uppercase;
 		border-radius: 4px;
-		height: 7vh;
-		max-height: 58px;
+		/* height: 7vh; */
+		max-height: 9vh;
 		background: var(--key-bg);
 		cursor: pointer;
 		display: grid;

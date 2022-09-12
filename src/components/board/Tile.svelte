@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onDestroy } from "svelte";
-
 	import { DELAY_INCREMENT, ROWS } from "../../utils";
 
 	export let value = "";
@@ -8,7 +6,7 @@
 	export let position = 0;
 	export let word_length: number;
 	export function bounce() {
-		setTimeout(() => (animation = "bounce"), (ROWS + position) * DELAY_INCREMENT);
+		setTimeout(() => (animation = "bounce"), (3 + position) * DELAY_INCREMENT);
 	}
 	let s: string;
 	let pop = false;
@@ -29,8 +27,6 @@
 	s = "🔳";
 	setTimeout(() => (s = ""), 10);
 	setTimeout(() => (pop = true), 200);
-
-	//onDestroy(unsub);
 </script>
 
 <div
@@ -38,7 +34,7 @@
 	class:value
 	class:pop
 	class="tile {state} {s}"
-	style="transition-delay: {position * DELAY_INCREMENT}ms; font-size: calc(min(34vw, 28vh, 140px) / {word_length}); line-height: calc(min(34vw, 24vh, 140px) / {word_length})"
+	style="transition-delay: {position * DELAY_INCREMENT}ms;"
 >
 	{#if value != " "}
 		<div class="front">
@@ -47,7 +43,6 @@
 					x="50%" y="50%" 
 					text-anchor="middle" 
 					dominant-baseline="central"
-					font-size="min(5vh, 5vw)"
 				>{value}</text>
 			</svg>
 		</div>
@@ -66,13 +61,16 @@
 </div>
 
 <style lang="scss">
+	text {
+		font-size: min(5vh, 5vw);
+	}
 	:not(.pop),
 	:global(.complete) .value {
 		scale: 1 !important;
 		opacity: 1 !important;
 	}
 	.value {
-		animation: pop 0.1s;
+		animation: pop 0.1s steps(10000);
 		.front {
 			border-color: var(--border-primary);
 		}
@@ -84,7 +82,7 @@
 		transform-style: preserve-3d;
 		aspect-ratio: 1;
 		&[data-animation="bounce"] {
-			animation: bounce 1s;
+			animation: bounce 1s steps(10000);
 		}
 	}
 	.back,

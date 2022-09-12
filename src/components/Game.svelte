@@ -91,10 +91,13 @@
 		board.bounce(game.guesses - 1);
 		game.active = false;
 		setTimeout(
-			() => toaster.pop(PRAISE[game.guesses - 1]),
-			DELAY_INCREMENT * word.length + DELAY_INCREMENT
+			() => {
+				toaster.pop(PRAISE[game.guesses - 1]);
+				setTimeout(setShowStatsTrue, 1200);
+			},
+			DELAY_INCREMENT * (word.length/2 + 4) + 1000
 		);
-		setTimeout(setShowStatsTrue, delay * 1.4);
+		
 		
 		++stats.guesses[game.guesses];
 		++stats.played;
@@ -269,19 +272,6 @@
 		&:hover {
 			opacity: 0.9;
 		}
-	}
-	.button {
-		height: 45px;
-		aspect-ratio: 1;
-		padding: 4px;
-		background: var(--color-correct);
-		border-radius: 4px;
-		cursor: pointer;
-		margin: auto;
-		fill: white;
-	}
-	.button:hover {
-		opacity: 0.9;
 	}
 	.next {
 		color: #fff;

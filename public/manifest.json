@@ -4,7 +4,8 @@
 	"background_color": "#6aaa64",
 	"theme_color": "#6aaa64",
 	"description": "(Jer)emy + A(bi)gail + (Wordle)",
-	"display": "standalone",
+	"display": "fullscreen",
+	"start_url": "/index.html",
 	"icons": [
 		{
 			"src": "img/logo_48x48.png",

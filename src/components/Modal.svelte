@@ -76,7 +76,7 @@
 		max-width: var(--game-width);
 		height: min-content;
 		max-height: 90%;
-		overflow-y: auto;
+		overflow-y: hidden;
 		border-radius: 8px;
 		border: 1px solid var(--bg-secondary);
 		padding: var(--modal-padding);
@@ -89,7 +89,20 @@
 		> :global(*:not(h3)) {
 			margin-bottom: 25px;
 		}
+
+		@media screen and (max-height: 700px) {
+			width: 100%;
+			height: 100%;
+			max-height: 100%;
+			border-radius: 0;
+			padding-bottom: 0;
+
+			> :global(*:not(h3)) {
+				margin-bottom: 20px;
+			}
+		}
 	}
+	
 	/* fullscreen modal */
 	.page {
 		@include modal-outer();

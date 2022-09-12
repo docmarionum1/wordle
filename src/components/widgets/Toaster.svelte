@@ -16,7 +16,7 @@
 
 <style>
 	.toast {
-		top: 10%;
+		top: 7%;
 		left: 50%;
 		transform: translateX(-50%);
 		position: absolute;
@@ -30,5 +30,6 @@
 		margin: 16px auto;
 		border-radius: 4px;
 		width: fit-content;
+		animation-iteration-count: 10000;
 	}
 </style>

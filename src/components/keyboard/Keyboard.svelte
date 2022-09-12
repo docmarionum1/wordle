@@ -97,7 +97,9 @@
 		align-items: center;
 		margin-bottom: 2px;
 		flex: 1;
-		max-height: 25vh;
+		max-height: 30vh;
+		justify-content: flex-end;
+		flex-grow: 1;
 	}
 	.row {
 		touch-action: manipulation;
@@ -105,7 +107,7 @@
 		display: flex;
 		margin: 0 auto 8px;
 		padding: 0 8px;
-		gap: 6px;
+		gap: 4px;
 		flex: 1;
 	}
 	.row:nth-of-type(2) {

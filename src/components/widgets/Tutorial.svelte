@@ -18,42 +18,41 @@
 <div class:complete={visible} class="examples">
 	<div><strong>Examples</strong></div>
 	<div class="row">
-		<Tile value="A" state="🟩" />
-		<Tile value="b" state="🔳" />
-		<Tile value="i" state="🔳" />
-		<Tile value="g" state="🔳" />
-		<Tile value="a" state="🔳" />
-		<Tile value="i" state="🔳" />
-		<Tile value="l" state="🔳" />
+		<Tile value="A" state="🟩" word_length={7}/>
+		<Tile value="b" state="🔳" word_length={7}/>
+		<Tile value="i" state="🔳" word_length={7}/>
+		<Tile value="g" state="🔳" word_length={7}/>
+		<Tile value="a" state="🔳" word_length={7}/>
+		<Tile value="i" state="🔳" word_length={7}/>
+		<Tile value="l" state="🔳" word_length={7}/>
 	</div>
 	<div>The letter <strong>A</strong> is in the word and in the correct spot.</div>
 	<div class="row">
-		<Tile value="j" state="🔳" />
-		<Tile value="e" state="🔳" />
-		<Tile value="r" state="🟨" />
-		<Tile value="e" state="🔳" />
-		<Tile value="m" state="🔳" />
-		<Tile value="y" state="🔳" />
-		<Tile value="🙃" state="🔳" />
+		<Tile value="j" state="🔳" word_length={7}/>
+		<Tile value="e" state="🔳" word_length={7}/>
+		<Tile value="r" state="🟨" word_length={7}/>
+		<Tile value="e" state="🔳" word_length={7}/>
+		<Tile value="m" state="🔳" word_length={7}/>
+		<Tile value="y" state="🔳" word_length={7}/>
+		<Tile value="🙃" state="🔳" word_length={7}/>
 	</div>
 	<div>The letter <strong>R</strong> is in the word but in the wrong spot.</div>
 	<div class="row">
-		<Tile value="w" state="🔳" />
-		<Tile value="e" state="🔳" />
-		<Tile value="d" state="🔳" />
-		<Tile value="d" state="🔳" />
-		<Tile value="i" state="⬛" />
-		<Tile value="n" state="🔳" />
-		<Tile value="g" state="🔳" />
+		<Tile value="w" state="🔳" word_length={7}/>
+		<Tile value="e" state="🔳" word_length={7}/>
+		<Tile value="d" state="🔳" word_length={7}/>
+		<Tile value="d" state="🔳" word_length={7}/>
+		<Tile value="i" state="⬛" word_length={7}/>
+		<Tile value="n" state="🔳" word_length={7}/>
+		<Tile value="g" state="🔳" word_length={7}/>
 	</div>
 	<div>The letter <strong>I</strong> is not in the word in any spot.</div>
 </div>
 <div>
-	This is a recreation of the original <a
+	Adapted from an open source version of <a
 		href="https://www.nytimes.com/games/wordle/"
 		target="_blank">Wordle</a
-	>
-	by Josh Wardle, adapted from an open source version by
+	> by
 	<a href="https://github.com/MikhaD" target="_blank">MikhaD</a>.
 </div>
 
@@ -71,6 +70,9 @@
 		&:not(.complete) :global(.row .back) {
 			transition-delay: 0.3s;
 		}
+	}
+	:global(.examples text) {
+		font-size: min(3vh,3vw) !important;
 	}
 	.row {
 		height: 40px;

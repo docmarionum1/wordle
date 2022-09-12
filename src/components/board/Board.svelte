@@ -75,9 +75,9 @@
 		display: grid;
 		grid-template-rows: repeat(var(--rows));
 		gap: 5.5px;
-		max-height: 50vh;
-		max-width: 100%;
-		flex-grow: 1;
+		max-height: min(60vh, 500px);
+		max-width: 95vw;
+		flex-grow: 2;
 		padding: 10px;
 		position: relative;
 		align-content: center;

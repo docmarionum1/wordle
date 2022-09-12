@@ -45,7 +45,7 @@
 		gap: 5px;
 		height: fit-content;
 		&[data-animation="shake"] {
-			animation: shake 0.6s;
+			animation: shake 0.6s steps(10000);
 		}
 	}
 	@keyframes shake {
