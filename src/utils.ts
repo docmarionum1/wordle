@@ -12,16 +12,16 @@ export const words = {
 
 export const targets = {
 	words: [
-		"ferry",
-		"pizza",
 		"nerds",
-		"geode",
 		"magic",
 		"donut",
+		"geode",
+		"ferry",
 		"haiku",
+		"pizza",
 		"ios",
-		"waffle",
 		"python",
+		"waffle",
 		"museum",
 		"podcast",
 		"brooklyn",

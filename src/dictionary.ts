@@ -1,5 +1,13 @@
 const words = {
   words: [
+  "jeremy",
+  "neiman",
+  "dvorak",
+  "barnard",
+  "google",
+  "pokemon",
+  "brookses",
+  "abby",
   "aa",
   "aah",
   "aahed",
